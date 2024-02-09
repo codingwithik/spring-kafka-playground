@@ -10,16 +10,10 @@ public class MessageConsumer {
 
     Logger LOG = LoggerFactory.getLogger(MessageConsumer.class);
 
-    @KafkaListener(topics = "test-1", groupId = "test-group-id")
+    @KafkaListener(topics = "test-2", groupId = "consumer-group-id")
     public void listen(String message) {
-        System.out.println("Received message: " + message);
+        LOG.info("Received message: {}", message);
     }
 
-//    @KafkaListener(
-//            topics = "test-1, test-2",
-//            groupId = "test-group-id")
-//    void commonListenerForMultipleTopics(String message) {
-//        LOG.info("MultipleTopicListener - {}", message);
-//    }
 
 }

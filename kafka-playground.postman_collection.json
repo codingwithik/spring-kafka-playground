@@ -1,0 +1,110 @@
+{
+	"info": {
+		"_postman_id": "02e46675-8f61-4fd3-8e39-f45c15157db9",
+		"name": "kafka-playground",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7116472"
+	},
+	"item": [
+		{
+			"name": "http://localhost:6000/send?message=testing test-1 topic",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:6000/send?message=testing test-1 topic",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6000",
+					"path": [
+						"send"
+					],
+					"query": [
+						{
+							"key": "message",
+							"value": "testing test-1 topic"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:6000/send-message?message=testing test-2 topic",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:6000/send-message?message=testing test-2 topic",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6000",
+					"path": [
+						"send-message"
+					],
+					"query": [
+						{
+							"key": "message",
+							"value": "testing test-2 topic"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:6005/send?name=codingwithik",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:6005/send?name=codingwithik",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6005",
+					"path": [
+						"send"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "codingwithik"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:6005/multi-send?name=codingwithik",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:6005/multi-send?name=codingwithik",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6005",
+					"path": [
+						"multi-send"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "codingwithik"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -12,7 +12,6 @@ services:
     container_name: kafka-producer
     environment:
       - spring.kafka.bootstrap-servers=kafka1:19092
-      - spring.kafka.consumer.group-id=test-group-id
 
 
   kafka-consumer-one:
@@ -25,7 +24,7 @@ services:
     container_name: kafka-consumer-one
     environment:
       - spring.kafka.bootstrap-servers=kafka1:19092
-      - spring.kafka.consumer.group-id=test-group-id
+      - spring.kafka.consumer.group-id=consumer-group-id
 
   kafka-consumer-two:
     image: kafka-consumer-two:latest
@@ -37,7 +36,7 @@ services:
     container_name: kafka-consumer-two
     environment:
       - spring.kafka.bootstrap-servers=kafka1:19092
-      - spring.kafka.consumer.group-id=test-group-id
+      - spring.kafka.consumer.group-id=consumer-two-group-id
 
   kafka-consumer-three:
     image: kafka-consumer-three:latest
@@ -49,4 +48,15 @@ services:
     container_name: kafka-consumer-three
     environment:
       - spring.kafka.bootstrap-servers=kafka1:19092
-      - spring.kafka.consumer.group-id=my-group-id
+      - spring.kafka.consumer.group-id=consumer-group-id
+
+  kafka-producer-two:
+    image: kafka-producer-two:latest
+    ports:
+      - 6005:6005
+    build:
+      context: ./kafka-producer-two
+      dockerfile: Dockerfile
+    container_name: kafka-producer-two
+    environment:
+      - spring.kafka.bootstrap-servers=kafka1:19092

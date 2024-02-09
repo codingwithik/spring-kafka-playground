@@ -16,25 +16,24 @@ public class MessageConsumer {
 
     Logger LOG = LoggerFactory.getLogger(MessageConsumer.class);
 
-    @KafkaListener(topics = "test-1", groupId = "test-group-id")
+    @KafkaListener(topics = "test-1", groupId = "consumer-group-id")
     public void listen(String message) {
         System.out.println("Received message: " + message);
     }
 
-    @KafkaListener(
-            topics = {"test-1, test-2"},
-            groupId = "test-group-id")
-    void commonListenerForMultipleTopics(String message) {
-        LOG.info("MultipleTopicListener - {}", message);
-    }
+//    @KafkaListener(
+//            topics = {"test-1, test-2"},
+//            groupId = "consumer-group-id")
+//    void commonListenerForMultipleTopics(String message) {
+//        LOG.info("MultipleTopicListener - {}", message);
+//    }
 
     // read all messages on start-up from partition 0 and 3
     @KafkaListener(
-            topicPartitions = @TopicPartition(topic = "test-1",
+            topicPartitions = @TopicPartition(topic = "test-2",
                     partitionOffsets = {
                             @PartitionOffset(partition = "0", initialOffset = "0"),
-                            @PartitionOffset(partition = "3", initialOffset = "0")}),
-            containerFactory = "partitionsKafkaListenerContainerFactory")
+                            @PartitionOffset(partition = "3", initialOffset = "0")}))
     public void listenToPartition(
             @Payload String message,
             @Header(KafkaHeaders.RECEIVED_PARTITION) int partition) {
@@ -45,9 +44,9 @@ public class MessageConsumer {
     // if we want to receive all the messages sent to a topic from the time of its creation on application startup
     // we can set the initial offset to zero:
     @KafkaListener(
-            groupId = "reflectoring-group-3",
+            groupId = "consumer-group-id",
             topicPartitions = @TopicPartition(
-                    topic = "reflectoring-1",
+                    topic = "test-1",
                     partitionOffsets = { @PartitionOffset(partition = "0", initialOffset = "0") }
             ))
     void listenToPartitionWithOffset(
@@ -60,18 +59,18 @@ public class MessageConsumer {
                 offset);
     }
 
-    @KafkaListener(topics = "reflectoring-others")
-    @SendTo("reflectoring-1")
-    String listenAndReply(String message) {
-        LOG.info("ListenAndReply [{}]", message);
-        return "This is a reply sent after receiving message";
-    }
-
-    @KafkaListener(
-            topics = "topicName",
-            containerFactory = "filterKafkaListenerContainerFactory")
-    public void listenWithFilter(String message) {
-        System.out.println("Received Message in filtered listener: " + message);
-    }
+//    @KafkaListener(topics = "reflectoring-others")
+//    @SendTo("reflectoring-1")
+//    String listenAndReply(String message) {
+//        LOG.info("ListenAndReply [{}]", message);
+//        return "This is a reply sent after receiving message";
+//    }
+//
+//    @KafkaListener(
+//            topics = "topic-name",
+//            containerFactory = "filterKafkaListenerContainerFactory")
+//    public void listenWithFilter(String message) {
+//        System.out.println("Received Message in filtered listener: " + message);
+//    }
 
 }
