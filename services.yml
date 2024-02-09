@@ -1,0 +1,52 @@
+version: '3.9'
+
+services:
+
+  kafka-producer:
+    image: kafka-producer:latest
+    ports:
+      - 6000:6000
+    build:
+      context: ./kafka-producer
+      dockerfile: Dockerfile
+    container_name: kafka-producer
+    environment:
+      - spring.kafka.bootstrap-servers=kafka1:19092
+      - spring.kafka.consumer.group-id=test-group-id
+
+
+  kafka-consumer-one:
+    image: kafka-consumer-one:latest
+    ports:
+      - 6001:6001
+    build:
+      context: ./kafka-consumer-one
+      dockerfile: Dockerfile
+    container_name: kafka-consumer-one
+    environment:
+      - spring.kafka.bootstrap-servers=kafka1:19092
+      - spring.kafka.consumer.group-id=test-group-id
+
+  kafka-consumer-two:
+    image: kafka-consumer-two:latest
+    ports:
+      - 6002:6002
+    build:
+      context: ./kafka-consumer-two
+      dockerfile: Dockerfile
+    container_name: kafka-consumer-two
+    environment:
+      - spring.kafka.bootstrap-servers=kafka1:19092
+      - spring.kafka.consumer.group-id=test-group-id
+
+  kafka-consumer-three:
+    image: kafka-consumer-three:latest
+    ports:
+      - 6003:6003
+    build:
+      context: ./kafka-consumer-three
+      dockerfile: Dockerfile
+    container_name: kafka-consumer-three
+    environment:
+      - spring.kafka.bootstrap-servers=kafka1:19092
+      - spring.kafka.consumer.group-id=my-group-id
